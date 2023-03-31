@@ -4,10 +4,8 @@ red='\033[0;31m'
 green='\033[0;32m'
 yellow='\033[0;33m'
 plain='\033[0m'
-echo "YESSSSS\n"
 
 cur_dir=$(pwd)
-
 
 # check root
 [[ $EUID -ne 0 ]] && echo -e "${red}Fatal error：${plain} Please run this script with root privilege \n " && exit 1
@@ -135,8 +133,8 @@ install_x-ui2() {
     rm x-ui-linux-${arch}.tar.gz -f
     cd x-ui2
     chmod +x x-ui bin/xray-linux-${arch}
-    cp -f x-ui.service /etc/systemd/system/
-    wget --no-check-certificate -O /usr/bin/x-ui2 https://github.com/flightlover/x-ui2/blob/main/x-ui2.sh
+    cp -f x-ui2.service /etc/systemd/system/
+    wget --no-check-certificate -O /usr/bin/x-ui2 https://raw.githubusercontent.com/flightlover/x-ui2/main/x-ui2.sh
     chmod +x /usr/local/x-ui2/x-ui2.sh
     chmod +x /usr/bin/x-ui2
     config_after_install
