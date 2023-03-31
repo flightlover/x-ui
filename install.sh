@@ -77,7 +77,7 @@ install_base() {
     fi
 }
 
-#This function will be called when user installed x-ui out of sercurity
+#This function will be called when user installed x-ui2 out of sercurity
 config_after_install() {
     echo -e "${yellow}Install/update finished! For security it's recommended to modify panel settings ${plain}"
     read -p "Do you want to continue with the modification [y/n]? ": config_confirm
@@ -103,24 +103,24 @@ install_x-ui2() {
     cd /usr/local/
 
     if [ $# == 0 ]; then
-        last_version=$(curl -Ls "https://api.github.com/repos/alireza0/x-ui/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+        last_version=$(curl -Ls "https://api.github.com/repos/flightlover/x-ui/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
         if [[ ! -n "$last_version" ]]; then
-            echo -e "${red}Failed to fetch x-ui version, it maybe due to Github API restrictions, please try it later${plain}"
+            echo -e "${red}Failed to fetch x-ui2 version, it maybe due to Github API restrictions, please try it later${plain}"
             exit 1
         fi
-        echo -e "Got x-ui latest version: ${last_version}, beginning the installation..."
-        wget -N --no-check-certificate -O /usr/local/x-ui-linux-${arch}.tar.gz https://github.com/alireza0/x-ui/releases/download/${last_version}/x-ui-linux-${arch}.tar.gz
+        echo -e "Got x-ui2 latest version: ${last_version}, beginning the installation..."
+        wget -N --no-check-certificate -O /usr/local/x-ui2-linux-${arch}.tar.gz https://github.com/flightlover/x-ui/releases/download/${last_version}/x-ui2-linux-${arch}.tar.gz
         if [[ $? -ne 0 ]]; then
-            echo -e "${red}Dowanloading x-ui failed, please be sure that your server can access Github ${plain}"
+            echo -e "${red}Dowanloading x-ui2 failed, please be sure that your server can access Github ${plain}"
             exit 1
         fi
     else
         last_version=$1
-        url="https://github.com/alireza0/x-ui/releases/download/${last_version}/x-ui-linux-${arch}.tar.gz"
-        echo -e "Begining to install x-ui v$1"
-        wget -N --no-check-certificate -O /usr/local/x-ui-linux-${arch}.tar.gz ${url}
+        url="https://github.com/flightlover/x-ui/releases/download/${last_version}/x-ui2-linux-${arch}.tar.gz"
+        echo -e "Begining to install x-ui2 v$1"
+        wget -N --no-check-certificate -O /usr/local/x-ui2-linux-${arch}.tar.gz ${url}
         if [[ $? -ne 0 ]]; then
-            echo -e "${red}dowanload x-ui v$1 failed,please check the verison exists${plain}"
+            echo -e "${red}dowanload x-ui2 v$1 failed,please check the verison exists${plain}"
             exit 1
         fi
     fi
@@ -129,10 +129,10 @@ install_x-ui2() {
         rm /usr/local/x-ui2/ -rf
     fi
 
-    tar zxvf x-ui-linux-${arch}.tar.gz
-    rm x-ui-linux-${arch}.tar.gz -f
+    tar zxvf x-ui2-linux-${arch}.tar.gz
+    rm x-ui2-linux-${arch}.tar.gz -f
     cd x-ui2
-    chmod +x x-ui bin/xray-linux-${arch}
+    chmod +x x-ui2 bin/xray-linux-${arch}
     cp -f x-ui2.service /etc/systemd/system/
     wget --no-check-certificate -O /usr/bin/x-ui2 https://raw.githubusercontent.com/flightlover/x-ui/main/x-ui2.sh
     chmod +x /usr/local/x-ui2/x-ui2.sh
@@ -140,7 +140,7 @@ install_x-ui2() {
     config_after_install
     #echo -e "If it is a new installation, the default web port is ${green}54321${plain}, The username and password are ${green}admin${plain} by default"
     #echo -e "Please make sure that this port is not occupied by other procedures,${yellow} And make sure that port 54321 has been released${plain}"
-    #    echo -e "If you want to modify the 54321 to other ports and enter the x-ui command to modify it, you must also ensure that the port you modify is also released"
+    #    echo -e "If you want to modify the 54321 to other ports and enter the x-ui2 command to modify it, you must also ensure that the port you modify is also released"
     #echo -e ""
     #echo -e "If it is updated panel, access the panel in your previous way"
     #echo -e ""
