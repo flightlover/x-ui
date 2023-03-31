@@ -3,8 +3,8 @@
 tmp
 bin/
 dist/
-x-ui-*.tar.gz
-/x-ui
+x-ui2-*.tar.gz
+/x-ui2
 /release.sh
 .sync*
 main
