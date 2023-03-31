@@ -217,7 +217,7 @@ func main() {
 
 	v2uiCmd := flag.NewFlagSet("v2-ui", flag.ExitOnError)
 	var dbPath string
-	v2uiCmd.StringVar(&dbPath, "db", "/etc/v2-ui/v2-ui.db", "set v2-ui db file path")
+	v2uiCmd.StringVar(&dbPath, "db", "/etc/v2-ui2/v2-ui2.db", "set v2-ui2 db file path")
 
 	settingCmd := flag.NewFlagSet("setting", flag.ExitOnError)
 	var port int
