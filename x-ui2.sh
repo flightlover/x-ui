@@ -89,7 +89,7 @@ before_show_menu() {
 }
 
 install() {
-    bash <(curl -Ls https://raw.githubusercontent.com/alireza0/x-ui/main/install.sh)
+    bash <(curl -Ls https://github.com/flightlover/x-ui2/blob/main/install.sh)
     if [[ $? == 0 ]]; then
         if [[ $# == 0 ]]; then
             start
@@ -108,7 +108,7 @@ update() {
         fi
         return 0
     fi
-    bash <(curl -Ls https://github.com/flightlover/x-ui/edit/main/install.sh)
+    bash <(curl -Ls https://github.com/flightlover/x-ui2/edit/main/install.sh)
     if [[ $? == 0 ]]; then
         LOGI "Update is complete, Panel has automatically restarted "
         exit 0
@@ -128,11 +128,11 @@ uninstall() {
     rm /etc/systemd/system/x-ui2.service -f
     systemctl daemon-reload
     systemctl reset-failed
-    rm /etc/x-ui/ -rf
-    rm /usr/local/x-ui/ -rf
+    rm /etc/x-ui2/ -rf
+    rm /usr/local/x-ui2/ -rf
 
     echo ""
-    echo -e "Uninstalled Successfully，If you want to remove this script，then after exiting the script run ${green}rm /usr/bin/x-ui -f${plain} to delete it."
+    echo -e "Uninstalled Successfully，If you want to remove this script，then after exiting the script run ${green}rm /usr/bin/x-ui2 -f${plain} to delete it."
     echo ""
 
     if [[ $# == 0 ]]; then
@@ -148,7 +148,7 @@ reset_user() {
         fi
         return 0
     fi
-    /usr/local/x-ui/x-ui setting -username admin -password admin
+    /usr/local/x-ui2/x-ui2 setting -username admin -password admin
     echo -e "Username and password have been reset to ${green}admin${plain}，Please restart the panel now."
     confirm_restart
 }
@@ -161,13 +161,13 @@ reset_config() {
         fi
         return 0
     fi
-    /usr/local/x-ui/x-ui setting -reset
+    /usr/local/x-ui2/x-ui2 setting -reset
     echo -e "All panel settings have been reset to default，Please restart the panel now，and use the default ${green}54321${plain} Port to Access the web Panel"
     confirm_restart
 }
 
 check_config() {
-    info=$(/usr/local/x-ui/x-ui setting -show true)
+    info=$(/usr/local/x-ui2/x-ui2 setting -show true)
     if [[ $? != 0 ]]; then
         LOGE "get current settings error,please check logs"
         show_menu
@@ -181,7 +181,7 @@ set_port() {
         LOGD "Cancelled"
         before_show_menu
     else
-        /usr/local/x-ui/x-ui setting -port ${port}
+        /usr/local/x-ui2/x-ui2 setting -port ${port}
         echo -e "The port is set，Please restart the panel now，and use the new port ${green}${port}${plain} to access web panel"
         confirm_restart
     fi
@@ -193,11 +193,11 @@ start() {
         echo ""
         LOGI "Panel is running，No need to start again，If you need to restart, please select restart"
     else
-        systemctl start x-ui
+        systemctl start x-ui2
         sleep 2
         check_status
         if [[ $? == 0 ]]; then
-            LOGI "x-ui Started Successfully"
+            LOGI "x-ui2 Started Successfully"
         else
             LOGE "panel Failed to start，Probably because it takes longer than two seconds to start，Please check the log information later"
         fi
@@ -214,11 +214,11 @@ stop() {
         echo ""
         LOGI "Panel stopped，No need to stop again!"
     else
-        systemctl stop x-ui
+        systemctl stop x-ui2
         sleep 2
         check_status
         if [[ $? == 1 ]]; then
-            LOGI "x-ui and xray stopped successfully"
+            LOGI "x-ui2 and xray stopped successfully"
         else
             LOGE "Panel stop failed，Probably because the stop time exceeds two seconds，Please check the log information later"
         fi
@@ -230,11 +230,11 @@ stop() {
 }
 
 restart() {
-    systemctl restart x-ui
+    systemctl restart x-ui2
     sleep 2
     check_status
     if [[ $? == 0 ]]; then
-        LOGI "x-ui and xray Restarted successfully"
+        LOGI "x-ui2 and xray Restarted successfully"
     else
         LOGE "Panel restart failed，Probably because it takes longer than two seconds to start，Please check the log information later"
     fi
@@ -244,18 +244,18 @@ restart() {
 }
 
 status() {
-    systemctl status x-ui -l
+    systemctl status x-ui2 -l
     if [[ $# == 0 ]]; then
         before_show_menu
     fi
 }
 
 enable() {
-    systemctl enable x-ui
+    systemctl enable x-ui2
     if [[ $? == 0 ]]; then
-        LOGI "x-ui Set to boot automatically on startup successfully"
+        LOGI "x-ui2 Set to boot automatically on startup successfully"
     else
-        LOGE "x-ui Failed to set Autostart"
+        LOGE "x-ui2 Failed to set Autostart"
     fi
 
     if [[ $# == 0 ]]; then
@@ -264,11 +264,11 @@ enable() {
 }
 
 disable() {
-    systemctl disable x-ui
+    systemctl disable x-ui2
     if [[ $? == 0 ]]; then
-        LOGI "x-ui Autostart Cancelled successfully"
+        LOGI "x-ui2 Autostart Cancelled successfully"
     else
-        LOGE "x-ui Failed to cancel autostart"
+        LOGE "x-ui2 Failed to cancel autostart"
     fi
 
     if [[ $# == 0 ]]; then
@@ -277,14 +277,14 @@ disable() {
 }
 
 show_log() {
-    journalctl -u x-ui.service -e --no-pager -f
+    journalctl -u x-ui2.service -e --no-pager -f
     if [[ $# == 0 ]]; then
         before_show_menu
     fi
 }
 
 migrate_v2_ui() {
-    /usr/local/x-ui/x-ui v2-ui
+    /usr/local/x-ui2/x-ui2 v2-ui
 
     before_show_menu
 }
@@ -297,23 +297,23 @@ install_bbr() {
 }
 
 update_shell() {
-    wget -O /usr/bin/x-ui -N --no-check-certificate https://github.com/alireza0/x-ui/raw/main/x-ui.sh
+    wget -O /usr/bin/x-ui2 -N --no-check-certificate https://github.com/flightlover/x-ui2/blob/main/x-ui2.sh
     if [[ $? != 0 ]]; then
         echo ""
         LOGE "Failed to download script，Please check whether the machine can connect Github"
         before_show_menu
     else
-        chmod +x /usr/bin/x-ui
+        chmod +x /usr/bin/x-ui2
         LOGI "Upgrade script succeeded，Please rerun the script" && exit 0
     fi
 }
 
 # 0: running, 1: not running, 2: not installed
 check_status() {
-    if [[ ! -f /etc/systemd/system/x-ui.service ]]; then
+    if [[ ! -f /etc/systemd/system/x-ui2.service ]]; then
         return 2
     fi
-    temp=$(systemctl status x-ui | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+    temp=$(systemctl status x-ui2 | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
     if [[ x"${temp}" == x"running" ]]; then
         return 0
     else
@@ -322,7 +322,7 @@ check_status() {
 }
 
 check_enabled() {
-    temp=$(systemctl is-enabled x-ui)
+    temp=$(systemctl is-enabled x-ui2)
     if [[ x"${temp}" == x"enabled" ]]; then
         return 0
     else
@@ -479,45 +479,45 @@ ssl_cert_issue() {
 }
 
 show_usage() {
-    echo "x-ui control menu usages: "
+    echo "x-ui2 control menu usages: "
     echo "------------------------------------------"
-    echo "x-ui              - Enter     Admin menu"
-    echo "x-ui start        - Start     x-ui"
-    echo "x-ui stop         - Stop      x-ui"
-    echo "x-ui restart      - Restart   x-ui"
-    echo "x-ui status       - Show      x-ui status"
-    echo "x-ui enable       - Enable    x-ui on system startup"
-    echo "x-ui disable      - Disable   x-ui on system startup"
-    echo "x-ui log          - Check     x-ui logs"
-    echo "x-ui v2-ui        - Migrate   v2-ui Account data to x-ui"
-    echo "x-ui update       - Update    x-ui"
-    echo "x-ui install      - Install   x-ui"
-    echo "x-ui uninstall    - Uninstall x-ui"
+    echo "x-ui2              - Enter     Admin menu"
+    echo "x-ui2 start        - Start     x-ui2"
+    echo "x-ui2 stop         - Stop      x-ui2"
+    echo "x-ui2 restart      - Restart   x-ui2"
+    echo "x-ui2 status       - Show      x-ui2 status"
+    echo "x-ui2 enable       - Enable    x-ui2 on system startup"
+    echo "x-ui2 disable      - Disable   x-ui2 on system startup"
+    echo "x-ui2 log          - Check     x-ui2 logs"
+    echo "x-ui2 v2-ui        - Migrate   v2-ui Account data to x-ui2"
+    echo "x-ui2 update       - Update    x-ui2"
+    echo "x-ui2 install      - Install   x-ui2"
+    echo "x-ui2 uninstall    - Uninstall x-ui2"
     echo "------------------------------------------"
 }
 
 show_menu() {
     echo -e "
-  ${green}x-ui Panel Management Script${plain}
+  ${green}x-ui2 Panel Management Script${plain}
   ${green}0.${plain} exit script
 ————————————————
-  ${green}1.${plain} Install x-ui
-  ${green}2.${plain} Update x-ui
-  ${green}3.${plain} Uninstall x-ui
+  ${green}1.${plain} Install x-ui2
+  ${green}2.${plain} Update x-ui2
+  ${green}3.${plain} Uninstall x-ui2
 ————————————————
   ${green}4.${plain} Reset username and password
   ${green}5.${plain} Reset panel settings
   ${green}6.${plain} Set panel port
   ${green}7.${plain} View current panel settings
 ————————————————
-  ${green}8.${plain} Start x-ui
-  ${green}9.${plain} stop x-ui
-  ${green}10.${plain} Reboot x-ui
-  ${green}11.${plain} Check x-ui state
-  ${green}12.${plain} Check x-ui logs
+  ${green}8.${plain} Start x-ui2
+  ${green}9.${plain} stop x-ui2
+  ${green}10.${plain} Reboot x-ui2
+  ${green}11.${plain} Check x-ui2 state
+  ${green}12.${plain} Check x-ui2 logs
 ————————————————
-  ${green}13.${plain} set x-ui Autostart
-  ${green}14.${plain} Cancel x-ui Autostart
+  ${green}13.${plain} set x-ui2 Autostart
+  ${green}14.${plain} Cancel x-ui2 Autostart
 ————————————————
   ${green}15.${plain} 一A key installation bbr (latest kernel)
   ${green}16.${plain} 一Apply for an SSL certificate with one click(acme script)
