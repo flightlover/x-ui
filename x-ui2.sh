@@ -297,7 +297,7 @@ install_bbr() {
 }
 
 update_shell() {
-    wget -O /usr/bin/x-ui2 -N --no-check-certificate https://github.com/flightlover/x-ui2/blob/main/x-ui2.sh
+    wget -O /usr/bin/x-ui2 -N --no-check-certificate https://raw.githubusercontent.com/flightlover/x-ui2/main/x-ui2.sh
     if [[ $? != 0 ]]; then
         echo ""
         LOGE "Failed to download script，Please check whether the machine can connect Github"
