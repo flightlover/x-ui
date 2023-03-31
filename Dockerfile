@@ -12,5 +12,5 @@ WORKDIR /app
 
 RUN apk add ca-certificates tzdata && mkdir bin
 COPY --from=builder  /app/main /app/x-ui
-VOLUME [ "/etc/x-ui" ]
-CMD [ "./x-ui" ]
+VOLUME [ "/etc/x-ui2" ]
+CMD [ "./x-ui2" ]
