@@ -89,9 +89,9 @@ config_after_install() {
         read -p "Please set up the panel port:" config_port
         echo -e "${yellow}Your panel port is:${config_port}${plain}"
         echo -e "${yellow}Initializing, please wait...${plain}"
-        /usr/local/x-ui/x-ui setting -username ${config_account} -password ${config_password}
+        /usr/local/x-ui2/x-ui setting -username ${config_account} -password ${config_password}
         echo -e "${yellow}Account name and password set successfully!${plain}"
-        /usr/local/x-ui/x-ui setting -port ${config_port}
+        /usr/local/x-ui2/x-ui setting -port ${config_port}
         echo -e "${yellow}Panel port set successfully!${plain}"
     else
         echo -e "${red}Canceled, will use the default settings.${plain}"
@@ -125,8 +125,8 @@ install_x-ui() {
         fi
     fi
 
-    if [[ -e /usr/local/x-ui/ ]]; then
-        rm /usr/local/x-ui/ -rf
+    if [[ -e /usr/local/x-ui2/ ]]; then
+        rm /usr/local/x-ui2/ -rf
     fi
 
     tar zxvf x-ui-linux-${arch}.tar.gz
@@ -134,9 +134,9 @@ install_x-ui() {
     cd x-ui
     chmod +x x-ui bin/xray-linux-${arch}
     cp -f x-ui.service /etc/systemd/system/
-    wget --no-check-certificate -O /usr/bin/x-ui https://raw.githubusercontent.com/alireza0/x-ui/main/x-ui.sh
-    chmod +x /usr/local/x-ui/x-ui.sh
-    chmod +x /usr/bin/x-ui
+    wget --no-check-certificate -O /usr/bin/x-ui2 https://raw.githubusercontent.com/alireza0/x-ui/main/x-ui.sh
+    chmod +x /usr/local/x-ui2/x-ui.sh
+    chmod +x /usr/bin/x-ui2
     config_after_install
     #echo -e "If it is a new installation, the default web port is ${green}54321${plain}, The username and password are ${green}admin${plain} by default"
     #echo -e "Please make sure that this port is not occupied by other procedures,${yellow} And make sure that port 54321 has been released${plain}"
