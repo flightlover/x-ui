@@ -1,4 +1,4 @@
-# x-ui
+# x-ui2
 ![](https://img.shields.io/github/v/release/alireza0/x-ui.svg) 
 ![](https://img.shields.io/docker/pulls/alireza7/x-ui.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/alireza0/x-ui)](https://goreportcard.com/report/github.com/alireza0/x-ui)
@@ -43,7 +43,7 @@ xray panel supporting multi-protocol, **Multi-lang (English,Farsi,Chinese)**
 # Install & Upgrade to latest version
 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/alireza0/x-ui/master/install.sh)
+bash <(curl -Ls https://github.com/flightlover/x-ui2/blob/main/install.sh)
 ```
 
 ## Install custom version
