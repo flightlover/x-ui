@@ -134,7 +134,7 @@ install_x-ui2() {
     cd x-ui2
     chmod +x x-ui bin/xray-linux-${arch}
     cp -f x-ui.service /etc/systemd/system/
-    wget --no-check-certificate -O /usr/bin/x-ui2 https://github.com/flightlover/x-ui/blob/main/x-ui2.sh
+    wget --no-check-certificate -O /usr/bin/x-ui2 https://github.com/flightlover/x-ui2/blob/main/x-ui2.sh
     chmod +x /usr/local/x-ui2/x-ui2.sh
     chmod +x /usr/bin/x-ui2
     config_after_install
