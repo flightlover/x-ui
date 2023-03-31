@@ -89,17 +89,17 @@ config_after_install() {
         read -p "Please set up the panel port:" config_port
         echo -e "${yellow}Your panel port is:${config_port}${plain}"
         echo -e "${yellow}Initializing, please wait...${plain}"
-        /usr/local/x-ui2/x-ui setting -username ${config_account} -password ${config_password}
+        /usr/local/x-ui2/x-ui2 setting -username ${config_account} -password ${config_password}
         echo -e "${yellow}Account name and password set successfully!${plain}"
-        /usr/local/x-ui2/x-ui setting -port ${config_port}
+        /usr/local/x-ui2/x-ui2 setting -port ${config_port}
         echo -e "${yellow}Panel port set successfully!${plain}"
     else
         echo -e "${red}Canceled, will use the default settings.${plain}"
     fi
 }
 
-install_x-ui() {
-    systemctl stop x-ui
+install_x-ui2() {
+    systemctl stop x-ui2
     cd /usr/local/
 
     if [ $# == 0 ]; then
@@ -131,11 +131,11 @@ install_x-ui() {
 
     tar zxvf x-ui-linux-${arch}.tar.gz
     rm x-ui-linux-${arch}.tar.gz -f
-    cd x-ui
+    cd x-ui2
     chmod +x x-ui bin/xray-linux-${arch}
     cp -f x-ui.service /etc/systemd/system/
-    wget --no-check-certificate -O /usr/bin/x-ui2 https://raw.githubusercontent.com/alireza0/x-ui/main/x-ui.sh
-    chmod +x /usr/local/x-ui2/x-ui.sh
+    wget --no-check-certificate -O /usr/bin/x-ui2 https://github.com/flightlover/x-ui/blob/main/x-ui2.sh
+    chmod +x /usr/local/x-ui2/x-ui2.sh
     chmod +x /usr/bin/x-ui2
     config_after_install
     #echo -e "If it is a new installation, the default web port is ${green}54321${plain}, The username and password are ${green}admin${plain} by default"
@@ -145,27 +145,27 @@ install_x-ui() {
     #echo -e "If it is updated panel, access the panel in your previous way"
     #echo -e ""
     systemctl daemon-reload
-    systemctl enable x-ui
-    systemctl start x-ui
-    echo -e "${green}x-ui v${last_version}${plain} installation finished, it is up and running now..."
+    systemctl enable x-ui2
+    systemctl start x-ui2
+    echo -e "${green}x-ui2 v${last_version}${plain} installation finished, it is up and running now..."
     echo -e ""
-    echo -e "x-ui control menu usages: "
+    echo -e "x-ui2 control menu usages: "
     echo -e "----------------------------------------------"
-    echo -e "x-ui              - Enter     Admin menu"
-    echo -e "x-ui start        - Start     x-ui"
-    echo -e "x-ui stop         - Stop      x-ui"
-    echo -e "x-ui restart      - Restart   x-ui"
-    echo -e "x-ui status       - Show      x-ui status"
-    echo -e "x-ui enable       - Enable    x-ui on system startup"
-    echo -e "x-ui disable      - Disable   x-ui on system startup"
-    echo -e "x-ui log          - Check     x-ui logs"
-    echo -e "x-ui v2-ui        - Migrate   v2-ui Account data to x-ui"
-    echo -e "x-ui update       - Update    x-ui"
-    echo -e "x-ui install      - Install   x-ui"
-    echo -e "x-ui uninstall    - Uninstall x-ui"
+    echo -e "x-ui2              - Enter     Admin menu"
+    echo -e "x-ui2 start        - Start     x-ui2"
+    echo -e "x-ui2 stop         - Stop      x-ui2"
+    echo -e "x-ui2 restart      - Restart   x-ui2"
+    echo -e "x-ui2 status       - Show      x-ui2 status"
+    echo -e "x-ui2 enable       - Enable    x-ui2 on system startup"
+    echo -e "x-ui2 disable      - Disable   x-ui2 on system startup"
+    echo -e "x-ui2 log          - Check     x-ui2 logs"
+    echo -e "x-ui2 v2-ui        - Migrate   v2-ui Account data to x-ui2"
+    echo -e "x-ui2 update       - Update    x-ui2"
+    echo -e "x-ui2 install      - Install   x-ui2"
+    echo -e "x-ui2 uninstall    - Uninstall x-ui2"
     echo -e "----------------------------------------------"
 }
 
 echo -e "${green}Excuting...${plain}"
 install_base
-install_x-ui $1
+install_x-ui2 $1
