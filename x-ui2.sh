@@ -108,7 +108,7 @@ update() {
         fi
         return 0
     fi
-    bash <(curl -Ls https://raw.githubusercontent.com/alireza0/x-ui/main/install.sh)
+    bash <(curl -Ls https://github.com/flightlover/x-ui/edit/main/install.sh)
     if [[ $? == 0 ]]; then
         LOGI "Update is complete, Panel has automatically restarted "
         exit 0
@@ -123,9 +123,9 @@ uninstall() {
         fi
         return 0
     fi
-    systemctl stop x-ui
-    systemctl disable x-ui
-    rm /etc/systemd/system/x-ui.service -f
+    systemctl stop x-ui2
+    systemctl disable x-ui2
+    rm /etc/systemd/system/x-ui2.service -f
     systemctl daemon-reload
     systemctl reset-failed
     rm /etc/x-ui/ -rf
