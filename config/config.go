@@ -46,5 +46,5 @@ func IsDebug() bool {
 }
 
 func GetDBPath() string {
-	return fmt.Sprintf("/etc/%s/%s.db", GetName(), GetName())
+	return fmt.Sprintf("/etc/x-ui2/x-ui2.db", GetName(), GetName())
 }
