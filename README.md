@@ -43,7 +43,7 @@ xray panel supporting multi-protocol, **Multi-lang (English,Farsi,Chinese)**
 # Install & Upgrade to latest version
 
 ```
-bash <(curl -Ls https://github.com/flightlover/x-ui2/blob/main/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/flightlover/x-ui2/main/install.sh)
 ```
 
 ## Install custom version
