@@ -11,6 +11,6 @@ ENV TZ=Asia/Tehran
 WORKDIR /app
 
 RUN apk add ca-certificates tzdata && mkdir bin
-COPY --from=builder  /app/main /app/x-ui
-VOLUME [ "/etc/x-ui" ]
-CMD [ "./x-ui" ]
+COPY --from=builder  /app/main /app/x-ui2
+VOLUME [ "/etc/x-ui2" ]
+CMD [ "./x-ui2" ]
